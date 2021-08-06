@@ -1,0 +1,30 @@
+-- Section1
+SELECT * FROM `users` WHERE 1 ASC
+
+--Section2
+select sum(price)
+from orders o inner join deliveries d
+on o.delivery_id = d.id
+where year(d.requested_at) = '2020'
+
+--Section3
+SELECT drivers.id as driversID, avg(r.rate) as average 
+FROM `drivers` drivers inner join deliveries deliver on deliver.driver_id = drivers.id
+inner join rates r on r.delivery_id = deliver.id 
+group by drivers.id 
+DESC limit 0,10
+
+--Section4
+SELECT deliver.id as deliveryID, drivers.id as DriverID FROM `drivers` drivers
+inner join deliveries deliver on deliver.driver_id = drivers.id
+where HOUR(deliver.requested_at) - HOUR(deliver.delivered_at) > 3
+order by deliver.id ASC
+
+--Section5
+select count(deliveries.id) asdeliveryID, users.name as userName , users.phone as userPhone
+from deliveries deliveries inner join users users
+on deliveries.user_id = users.id
+where SQRT(POW(X(deliveries.src)-X(deliveries.dest),2) + POW(Y(deliveries.src)-Y(deliveries.dest),2)) > 20
+having(count(deliveries.id))>= 5
+order by users.name ASC
+
