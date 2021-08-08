@@ -1,0 +1,14 @@
+import re
+good_pass = False
+regexp = re.compile('[^0-9a-zA-Z]+')
+x = (input("enter a password"))
+for character in x:
+    if  regexp.search(x) and len(x) > 8:
+        good_pass = True
+
+if good_pass :
+    print("its a good password")
+else:
+    print("choose more strong password")
+
+
